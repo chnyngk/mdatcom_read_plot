@@ -1,0 +1,602 @@
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS   
+                                                 CONERR - INPUT ERROR CHECKING
+
+0 ERROR CODES - N* DENOTES THE NUMBER OF OCCURENCES OF EACH ERROR
+0 A - UNKNOWN VARIABLE NAME
+0 B - MISSING EQUAL SIGN FOLLOWING VARIABLE NAME
+0 C - NON-ARRAY VARIABLE HAS AN ARRAY ELEMENT DESIGNATION - (N)
+0 D - NON-ARRAY VARIABLE HAS MULTIPLE VALUES ASSIGNED
+0 E - ASSIGNED VALUES EXCEED ARRAY DIMENSION
+0 F - SYNTAX ERROR
+
+     ******************************  INPUT DATA CARDS  ******************************
+
+   1 CASEID CHANYOUNGK                                                               
+   2  $FLTCON NALPHA = 7.,                                                           
+   3          ALPHA = 0., 5., 10., 15., 20., 25., 30.,                               
+   4          NMACH = 7.,                                                            
+   5          MACH = 0.3, 0.8, 1.5, 2.0, 2.5, 3.0, 3.5,                              
+   6          ALT = 0.,$                                                             
+   7  $REFQ XCG = 1.5,$                                                              
+   8  $AXIBOD TNOSE = OGIVE,                                                            ** SUBSTITUTING NUMERIC FOR NAME OGIVE
+   9          LNOSE = 0.316,                                                         
+  10          DNOSE = 0.127,                                                         
+  11          LCENTR = 2.702,                                                        
+  12          DCENTR = 0.127,                                                        
+  13          TAFT = CONE,                                                              ** SUBSTITUTING NUMERIC FOR NAME CONE
+  14          LAFT = 0.,                                                             
+  15          DAFT = 0.,                                                             
+  16          DEXIT = 0.127,$                                                        
+  17  $FINSET1 SSPAN = 0.06435, 0.175,                                               
+  18           CHORD = 0.223, 0.0,                                                   
+  19           XLE = 0.316, 0.539,                                                   
+  20           SWEEP = 27.0,                                                         
+  21           STA = 0.,                                                             
+  22           NPANEL = 4.,                                                          
+  23           PHIF = 0., 90., 180., 270.,$                                          
+  24  $FINSET2 SSPAN = 0.0635, 0.223,                                                
+  25           CHORD = 0.24, 0.16,                                                   
+  26           XLE = 2.76, 2.84,                                                     
+  27           SWEEP = 63.,                                                          
+  28           STA = 0.,                                                             
+  29           NPANEL = 4.,                                                          
+  30           PHIF = 0., 90., 180., 270.,$                                          
+  31 DIM M                                                                           
+  32 DERIV DEG                                                                       
+  33 DAMP                                                                            
+  34 SAVE                                                                            
+  35 NEXT CASE                                                                       
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE   1
+                                                          CASE INPUTS
+0FOLLOWING ARE THE CARDS INPUT FOR THIS CASE
+
+ CASEID CHANYOUNGK                                                               
+  $FLTCON NALPHA = 7.,                                                           
+          ALPHA = 0., 5., 10., 15., 20., 25., 30.,                               
+          NMACH = 7.,                                                            
+          MACH = 0.3, 0.8, 1.5, 2.0, 2.5, 3.0, 3.5,                              
+          ALT = 0.,$                                                             
+  $REFQ XCG = 1.5,$                                                              
+  $AXIBOD TNOSE = 1.,                                                            
+          LNOSE = 0.316,                                                         
+          DNOSE = 0.127,                                                         
+          LCENTR = 2.702,                                                        
+          DCENTR = 0.127,                                                        
+          TAFT = 0.,                                                             
+          LAFT = 0.,                                                             
+          DAFT = 0.,                                                             
+          DEXIT = 0.127,$                                                        
+  $FINSET1 SSPAN = 0.06435, 0.175,                                               
+           CHORD = 0.223, 0.0,                                                   
+           XLE = 0.316, 0.539,                                                   
+           SWEEP = 27.0,                                                         
+           STA = 0.,                                                             
+           NPANEL = 4.,                                                          
+           PHIF = 0., 90., 180., 270.,$                                          
+  $FINSET2 SSPAN = 0.0635, 0.223,                                                
+           CHORD = 0.24, 0.16,                                                   
+           XLE = 2.76, 2.84,                                                     
+           SWEEP = 63.,                                                          
+           STA = 0.,                                                             
+           NPANEL = 4.,                                                          
+           PHIF = 0., 90., 180., 270.,$                                          
+ DIM M                                                                           
+ DERIV DEG                                                                       
+ DAMP                                                                            
+ SAVE                                                                            
+ NEXT CASE                                                                       
+0* WARNING * THE REYNOLDS NUMBER IS NOT DEFINED FOR INPUT SPEED  2
+             SEA LEVEL ALTITUDE ASSUMED
+0* WARNING * THE REYNOLDS NUMBER IS NOT DEFINED FOR INPUT SPEED  3
+             SEA LEVEL ALTITUDE ASSUMED
+0* WARNING * THE REYNOLDS NUMBER IS NOT DEFINED FOR INPUT SPEED  4
+             SEA LEVEL ALTITUDE ASSUMED
+0* WARNING * THE REYNOLDS NUMBER IS NOT DEFINED FOR INPUT SPEED  5
+             SEA LEVEL ALTITUDE ASSUMED
+0* WARNING * THE REYNOLDS NUMBER IS NOT DEFINED FOR INPUT SPEED  6
+             SEA LEVEL ALTITUDE ASSUMED
+0* WARNING * THE REYNOLDS NUMBER IS NOT DEFINED FOR INPUT SPEED  7
+             SEA LEVEL ALTITUDE ASSUMED
+0* WARNING * THE REFERENCE AREA IS UNSPECIFIED, DEFAULT VALUE ASSUMED 
+0* WARNING * THE REFERENCE LENGTH IS UNSPECIFIED, DEFAULT VALUE ASSUMED 
+0THE BOUNDARY LAYER IS ASSUMED TO BE TURBULENT OVER ALL COMPONENTS OF THE CONFIGURATION
+0THE INPUT UNITS ARE IN METERS, THE SCALE FACTOR IS   1.0000
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE   2
+                                                           CHANYOUNGK                                                              
+                                          STATIC AERODYNAMICS FOR BODY-FIN SET 1 AND 2
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  0.30        0.00     102.10   6.383E+03     288.15   6.955E+06      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                                                                       ------------------ DERIVATIVES (PER DEGREE) -----------------
+           ------ LONGITUDINAL -----       --- LATERAL DIRECTIONAL ---          LONGITUDINAL             LATERAL DIRECTIONAL
+   ALPHA      CN       CM       CA           CY      CLN      CLL             CNA         CMA         CYB        CLNB        CLLB
+
+    0.00     0.000    0.000    0.383        0.000    0.000    0.000        4.037E-01  -3.031E-01  -3.803E-01  -6.750E-02  -1.497E-08
+    5.00     2.412   -3.505    0.383        0.000    0.000    0.000        5.610E-01  -1.099E+00  -3.989E-01  -1.569E-01   6.922E-02
+   10.00     5.638  -12.296    0.378        0.000    0.000    0.000        6.358E-01  -1.922E+00  -4.631E-01   2.519E-01   1.172E-02
+   15.00     8.770  -22.851    0.358        0.000    0.000    0.000        6.097E-01  -2.345E+00  -4.160E-01  -3.230E-01   4.974E-02
+   20.00    11.736  -35.977    0.309        0.000    0.000    0.000        5.672E-01  -2.780E+00  -3.467E-01  -4.819E-01   8.692E-02
+   25.00    14.445  -50.733    0.216        0.000    0.000    0.000        4.502E-01  -3.038E+00  -2.622E-01  -7.481E-01   1.481E-01
+   30.00    16.267  -66.382    0.100        0.000    0.000    0.000        2.788E-01  -3.222E+00  -1.946E-01  -1.365E+00   2.244E-01
+
+                                            ALPHA      CL       CD     CL/CD   X-C.P.
+
+                                             0.00    0.000    0.383    0.000   -0.751
+                                             5.00    2.369    0.592    4.002   -1.453
+                                            10.00    5.487    1.351    4.061   -2.181
+                                            15.00    8.379    2.616    3.203   -2.606
+                                            20.00   10.923    4.305    2.537   -3.065
+                                            25.00   13.000    6.300    2.063   -3.512
+                                            30.00   14.038    8.220    1.708   -4.081
+0                                               PANEL DEFLECTION ANGLES (DEGREES)
+                                        FIN SET   FIN 1      FIN 2      FIN 3      FIN 4
+                                           1       0.00       0.00       0.00       0.00
+                                           2       0.00       0.00       0.00       0.00
+ 
+ 
+ 
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE   3
+                                                           CHANYOUNGK                                                              
+                                               BODY + 2 FIN SETS DYNAMIC DERIVATIVES
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  0.30        0.00     102.10   6.383E+03     288.15   6.955E+06      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                            -------------------- DYNAMIC DERIVATIVES (PER DEGREE) --------------------
+     ALPHA      CNQ        CMQ        CAQ        CNAD       CMAD       CYR        CLNR       CLLR       CYP        CLNP       CLLP
+      0.00      1.069     -9.836      0.000      1.021     -0.187      1.166     -9.836      0.000      0.000      0.000     -0.696
+      5.00      0.959     -9.576      0.000      1.021     -0.187      1.167     -9.868      0.044      0.190     -2.176     -0.651
+     10.00      0.826     -9.043      0.000      1.021     -0.187      1.169     -9.920      0.006      0.116     -1.331     -0.625
+     15.00      0.701     -8.417      0.000      1.021     -0.187      1.171     -9.975      0.001      0.062     -0.714     -0.629
+     20.00      0.584     -7.648      0.000      1.021     -0.187      1.172    -10.025      0.000      0.040     -0.454     -0.611
+     25.00      0.477     -6.787      0.000      1.021     -0.187      1.172    -10.067      0.000      0.027     -0.312     -0.587
+     30.00      0.383     -5.864      0.000      1.021     -0.187      1.171    -10.102      0.000      0.019     -0.218     -0.555
+
+                           PITCH RATE DERIVATIVES NON-DIMENSIONALIZED BY Q*LREF/2*V
+               YAW AND ROLL RATE DERIVATIVES NON-DIMENSIONALIZED BY R*LATREF/2*V AND P*LATREF/2*V
+
+                        TO CONVERT TO RATE*LENGTH/V, DIVIDE ABOVE RESULTS BY 2
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE   4
+                                                           CHANYOUNGK                                                              
+                                          STATIC AERODYNAMICS FOR BODY-FIN SET 1 AND 2
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  0.80        0.00     272.26   4.539E+04     288.15   1.855E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                                                                       ------------------ DERIVATIVES (PER DEGREE) -----------------
+           ------ LONGITUDINAL -----       --- LATERAL DIRECTIONAL ---          LONGITUDINAL             LATERAL DIRECTIONAL
+   ALPHA      CN       CM       CA           CY      CLN      CLL             CNA         CMA         CYB        CLNB        CLLB
+
+    0.00     0.000    0.000    0.324        0.000    0.000    0.000        4.721E-01  -3.158E-01  -4.310E-01  -1.587E-01  -7.507E-09
+    5.00     2.562   -3.456    0.324        0.000    0.000    0.000        5.528E-01  -1.066E+00  -4.259E-01  -2.045E-01   8.586E-02
+   10.00     5.536  -11.788    0.320        0.000    0.000    0.000        5.396E-01  -1.779E+00  -4.625E-01   2.684E-01   1.248E-02
+   15.00     7.971  -21.307    0.309        0.000    0.000    0.000        5.012E-01  -2.091E+00  -3.738E-01  -3.892E-01   4.121E-02
+   20.00    10.548  -32.857    0.281        0.000    0.000    0.000        4.989E-01  -2.454E+00  -3.173E-01  -7.704E-01   6.577E-02
+   25.00    12.961  -45.925    0.223        0.000    0.000    0.000        5.867E-01  -2.665E+00  -2.461E-01  -1.218E+00   1.063E-01
+   30.00    16.468  -59.517    0.050        0.000    0.000    0.000        8.159E-01  -2.772E+00  -2.027E-01  -1.526E+00   1.583E-01
+
+                                            ALPHA      CL       CD     CL/CD   X-C.P.
+
+                                             0.00    0.000    0.324    0.000   -0.669
+                                             5.00    2.524    0.546    4.624   -1.349
+                                            10.00    5.396    1.276    4.228   -2.130
+                                            15.00    7.619    2.361    3.226   -2.673
+                                            20.00    9.816    3.872    2.535   -3.115
+                                            25.00   11.653    5.680    2.052   -3.543
+                                            30.00   14.236    8.277    1.720   -3.614
+0                                               PANEL DEFLECTION ANGLES (DEGREES)
+                                        FIN SET   FIN 1      FIN 2      FIN 3      FIN 4
+                                           1       0.00       0.00       0.00       0.00
+                                           2       0.00       0.00       0.00       0.00
+ 
+ 
+ 
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE   5
+                                                           CHANYOUNGK                                                              
+                                               BODY + 2 FIN SETS DYNAMIC DERIVATIVES
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  0.80        0.00     272.26   4.539E+04     288.15   1.855E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                            -------------------- DYNAMIC DERIVATIVES (PER DEGREE) --------------------
+     ALPHA      CNQ        CMQ        CAQ        CNAD       CMAD       CYR        CLNR       CLLR       CYP        CLNP       CLLP
+      0.00      1.404    -12.980      0.000      1.352     -0.265      1.419    -12.980      0.000      0.000      0.000     -0.775
+      5.00      1.284    -12.732      0.000      1.352     -0.265      1.420    -13.021      0.072      0.207     -2.368     -0.766
+     10.00      1.143    -12.231      0.000      1.352     -0.265      1.421    -13.088      0.010      0.129     -1.480     -0.715
+     15.00      1.014    -11.664      0.000      1.352     -0.265      1.422    -13.161      0.003      0.075     -0.856     -0.744
+     20.00      0.896    -10.993      0.000      1.352     -0.265      1.422    -13.228      0.001      0.049     -0.564     -0.759
+     25.00      0.792    -10.240      0.000      1.352     -0.265      1.421    -13.286      0.001      0.035     -0.399     -0.744
+     30.00      0.695     -9.495      0.000      1.352     -0.265      1.419    -13.334      0.000      0.025     -0.291     -0.719
+
+                           PITCH RATE DERIVATIVES NON-DIMENSIONALIZED BY Q*LREF/2*V
+               YAW AND ROLL RATE DERIVATIVES NON-DIMENSIONALIZED BY R*LATREF/2*V AND P*LATREF/2*V
+
+                        TO CONVERT TO RATE*LENGTH/V, DIVIDE ABOVE RESULTS BY 2
+1FIN POTENTIAL FLOW METHOD FAILING.  SOURCE OR SINK LINE SWEPT FORWARD.
+0THE FIRST ORDER FIN POTENTIAL FLOW METHOD FOR FIN WAVE DRAG HAS FAILED.  AN ALTERNATE METHOD HAS BEEN SELECTED.
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE   6
+                                                           CHANYOUNGK                                                              
+                                          STATIC AERODYNAMICS FOR BODY-FIN SET 1 AND 2
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  1.50        0.00     510.49   1.596E+05     288.15   3.478E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                                                                       ------------------ DERIVATIVES (PER DEGREE) -----------------
+           ------ LONGITUDINAL -----       --- LATERAL DIRECTIONAL ---          LONGITUDINAL             LATERAL DIRECTIONAL
+   ALPHA      CN       CM       CA           CY      CLN      CLL             CNA         CMA         CYB        CLNB        CLLB
+
+    0.00     0.000    0.000    0.462        0.000    0.000    0.000        4.783E-01  -2.537E-01  -4.185E-01  -2.835E-01  -1.382E-08
+    5.00     2.362   -2.094    0.460        0.000    0.000    0.000        4.666E-01  -5.838E-01  -4.108E-01  -2.124E-01   8.099E-02
+   10.00     4.666   -5.977    0.456        0.000    0.000    0.000        4.943E-01  -7.941E-01  -4.034E-01  -6.422E-02   3.073E-02
+   15.00     7.310  -10.036    0.448        0.000    0.000    0.000        7.845E-01  -1.110E+00  -3.615E-01  -7.728E-01   8.038E-02
+   20.00    12.933  -17.702    0.438        0.000    0.000    0.000        1.041E+00  -1.667E+00  -4.335E-01  -8.363E-01   1.087E-01
+   25.00    17.754  -26.801    0.425        0.000    0.000    0.000        9.557E-01  -1.793E+00  -3.739E-01  -8.073E-01   1.443E-01
+   30.00    22.490  -35.638    0.410        0.000    0.000    0.000        9.388E-01  -1.741E+00  -3.383E-01  -1.219E+00   2.206E-01
+
+                                            ALPHA      CL       CD     CL/CD   X-C.P.
+
+                                             0.00    0.000    0.462    0.000   -0.530
+                                             5.00    2.313    0.664    3.482   -0.886
+                                            10.00    4.516    1.259    3.587   -1.281
+                                            15.00    6.945    2.325    2.987   -1.373
+                                            20.00   12.003    4.835    2.483   -1.369
+                                            25.00   15.911    7.888    2.017   -1.510
+                                            30.00   19.272   11.600    1.661   -1.585
+0                                               PANEL DEFLECTION ANGLES (DEGREES)
+                                        FIN SET   FIN 1      FIN 2      FIN 3      FIN 4
+                                           1       0.00       0.00       0.00       0.00
+                                           2       0.00       0.00       0.00       0.00
+ 
+ 
+ 
+0 LINEAR DATA FOR BODY ALONE WAS GENERATED USING VAN DYKE HYBRID THEORY
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE   7
+                                                           CHANYOUNGK                                                              
+                                               BODY + 2 FIN SETS DYNAMIC DERIVATIVES
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  1.50        0.00     510.49   1.596E+05     288.15   3.478E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                            -------------------- DYNAMIC DERIVATIVES (PER DEGREE) --------------------
+     ALPHA      CNQ        CMQ        CAQ        CNAD       CMAD       CYR        CLNR       CLLR       CYP        CLNP       CLLP
+      0.00      1.289    -20.539      0.000      1.387     -0.883      1.273    -20.360      0.000      0.000      0.000     -0.665
+      5.00      1.172    -20.324      0.000      1.387     -0.883      1.272    -20.393      0.078      0.171     -1.993     -0.646
+     10.00      1.053    -20.033      0.000      1.387     -0.883      1.269    -20.456      0.010      0.107     -1.247     -0.598
+     15.00      0.947    -19.760      0.000      1.387     -0.883      1.266    -20.521      0.003      0.064     -0.741     -0.611
+     20.00      0.847    -19.372      0.000      1.387     -0.883      1.263    -20.581      0.001      0.043     -0.506     -0.614
+     25.00      0.753    -18.891      0.000      1.387     -0.883      1.259    -20.633      0.000      0.032     -0.368     -0.607
+     30.00      0.664    -18.438      0.000      1.387     -0.883      1.256    -20.678      0.000      0.023     -0.272     -0.593
+
+                           PITCH RATE DERIVATIVES NON-DIMENSIONALIZED BY Q*LREF/2*V
+               YAW AND ROLL RATE DERIVATIVES NON-DIMENSIONALIZED BY R*LATREF/2*V AND P*LATREF/2*V
+
+                        TO CONVERT TO RATE*LENGTH/V, DIVIDE ABOVE RESULTS BY 2
+1FIN POTENTIAL FLOW METHOD FAILING.  SOURCE OR SINK LINE SWEPT FORWARD.
+0THE FIRST ORDER FIN POTENTIAL FLOW METHOD FOR FIN WAVE DRAG HAS FAILED.  AN ALTERNATE METHOD HAS BEEN SELECTED.
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE   8
+                                                           CHANYOUNGK                                                              
+                                          STATIC AERODYNAMICS FOR BODY-FIN SET 1 AND 2
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  2.00        0.00     680.65   2.837E+05     288.15   4.637E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                                                                       ------------------ DERIVATIVES (PER DEGREE) -----------------
+           ------ LONGITUDINAL -----       --- LATERAL DIRECTIONAL ---          LONGITUDINAL             LATERAL DIRECTIONAL
+   ALPHA      CN       CM       CA           CY      CLN      CLL             CNA         CMA         CYB        CLNB        CLLB
+
+    0.00     0.000    0.000    0.447        0.000    0.000    0.000        3.731E-01  -3.897E-01  -3.369E-01  -8.586E-02  -1.702E-08
+    5.00     1.928   -1.962    0.446        0.000    0.000    0.000        3.980E-01  -3.953E-01  -3.493E-01   9.033E-04   4.612E-02
+   10.00     3.981   -3.953    0.441        0.000    0.000    0.000        6.012E-01  -5.001E-01  -3.341E-01  -2.245E-01   2.688E-02
+   15.00     8.132   -7.009    0.435        0.000    0.000    0.000        8.146E-01  -7.843E-01  -4.150E-01  -8.061E-01   7.035E-02
+   20.00    12.128  -11.971    0.425        0.000    0.000    0.000        7.918E-01  -1.054E+00  -4.096E-01  -9.955E-01   1.059E-01
+   25.00    16.051  -17.572    0.414        0.000    0.000    0.000        7.595E-01  -1.133E+00  -3.572E-01  -1.167E+00   1.524E-01
+   30.00    19.725  -23.302    0.401        0.000    0.000    0.000        7.103E-01  -1.159E+00  -3.157E-01  -1.590E+00   2.084E-01
+
+                                            ALPHA      CL       CD     CL/CD   X-C.P.
+
+                                             0.00    0.000    0.447    0.000   -1.045
+                                             5.00    1.882    0.612    3.075   -1.018
+                                            10.00    3.843    1.126    3.413   -0.993
+                                            15.00    7.743    2.525    3.067   -0.862
+                                            20.00   11.251    4.548    2.474   -0.987
+                                            25.00   14.372    7.159    2.008   -1.095
+                                            30.00   16.882   10.210    1.654   -1.181
+0                                               PANEL DEFLECTION ANGLES (DEGREES)
+                                        FIN SET   FIN 1      FIN 2      FIN 3      FIN 4
+                                           1       0.00       0.00       0.00       0.00
+                                           2       0.00       0.00       0.00       0.00
+ 
+ 
+ 
+0 LINEAR DATA FOR BODY ALONE WAS GENERATED USING VAN DYKE HYBRID THEORY
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE   9
+                                                           CHANYOUNGK                                                              
+                                               BODY + 2 FIN SETS DYNAMIC DERIVATIVES
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  2.00        0.00     680.65   2.837E+05     288.15   4.637E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                            -------------------- DYNAMIC DERIVATIVES (PER DEGREE) --------------------
+     ALPHA      CNQ        CMQ        CAQ        CNAD       CMAD       CYR        CLNR       CLLR       CYP        CLNP       CLLP
+      0.00      0.887    -15.876      0.000      1.059     -0.675      0.922    -16.270      0.000      0.000      0.000     -0.639
+      5.00      0.790    -15.635      0.000      1.059     -0.675      0.918    -16.282      0.061      0.107     -1.247     -0.622
+     10.00      0.692    -15.427      0.000      1.059     -0.675      0.914    -16.327      0.008      0.067     -0.783     -0.585
+     15.00      0.600    -15.238      0.000      1.059     -0.675      0.909    -16.381      0.002      0.040     -0.462     -0.588
+     20.00      0.515    -14.956      0.000      1.059     -0.675      0.904    -16.438      0.001      0.027     -0.315     -0.584
+     25.00      0.438    -14.657      0.000      1.059     -0.675      0.900    -16.494      0.000      0.020     -0.230     -0.578
+     30.00      0.359    -14.363      0.000      1.059     -0.675      0.897    -16.548      0.000      0.015     -0.172     -0.564
+
+                           PITCH RATE DERIVATIVES NON-DIMENSIONALIZED BY Q*LREF/2*V
+               YAW AND ROLL RATE DERIVATIVES NON-DIMENSIONALIZED BY R*LATREF/2*V AND P*LATREF/2*V
+
+                        TO CONVERT TO RATE*LENGTH/V, DIVIDE ABOVE RESULTS BY 2
+1FIN POTENTIAL FLOW METHOD FAILING.  SOURCE OR SINK LINE SWEPT FORWARD.
+0THE FIRST ORDER FIN POTENTIAL FLOW METHOD FOR FIN WAVE DRAG HAS FAILED.  AN ALTERNATE METHOD HAS BEEN SELECTED.
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE  10
+                                                           CHANYOUNGK                                                              
+                                          STATIC AERODYNAMICS FOR BODY-FIN SET 1 AND 2
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  2.50        0.00     850.81   4.433E+05     288.15   5.796E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                                                                       ------------------ DERIVATIVES (PER DEGREE) -----------------
+           ------ LONGITUDINAL -----       --- LATERAL DIRECTIONAL ---          LONGITUDINAL             LATERAL DIRECTIONAL
+   ALPHA      CN       CM       CA           CY      CLN      CLL             CNA         CMA         CYB        CLNB        CLLB
+
+    0.00     0.000    0.000    0.395        0.000    0.000    0.000        2.597E-01  -4.318E-01  -2.423E-01   3.931E-02  -1.427E-08
+    5.00     1.679   -2.022    0.394        0.000    0.000    0.000        4.121E-01  -3.769E-01  -3.095E-01   1.073E-01   3.299E-02
+   10.00     4.142   -3.771    0.390        0.000    0.000    0.000        5.808E-01  -2.956E-01  -3.617E-01  -1.276E-01   2.698E-02
+   15.00     7.524   -4.986    0.384        0.000    0.000    0.000        6.754E-01  -2.946E-01  -3.935E-01  -6.642E-01   7.068E-02
+   20.00    10.896   -6.725    0.376        0.000    0.000    0.000        6.564E-01  -4.002E-01  -3.772E-01  -8.664E-01   1.081E-01
+   25.00    14.089   -8.997    0.366        0.000    0.000    0.000        6.626E-01  -4.806E-01  -3.266E-01  -1.083E+00   1.567E-01
+   30.00    17.525  -11.533    0.354        0.000    0.000    0.000        7.118E-01  -5.338E-01  -2.971E-01  -1.441E+00   2.046E-01
+
+                                            ALPHA      CL       CD     CL/CD   X-C.P.
+
+                                             0.00    0.000    0.395    0.000   -1.663
+                                             5.00    1.639    0.539    3.041   -1.204
+                                            10.00    4.012    1.104    3.635   -0.910
+                                            15.00    7.168    2.318    3.092   -0.663
+                                            20.00   10.111    4.080    2.478   -0.617
+                                            25.00   12.615    6.286    2.007   -0.639
+                                            30.00   15.001    9.069    1.654   -0.658
+0                                               PANEL DEFLECTION ANGLES (DEGREES)
+                                        FIN SET   FIN 1      FIN 2      FIN 3      FIN 4
+                                           1       0.00       0.00       0.00       0.00
+                                           2       0.00       0.00       0.00       0.00
+ 
+ 
+ 
+0 LINEAR DATA FOR BODY ALONE WAS GENERATED USING VAN DYKE HYBRID THEORY
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE  11
+                                                           CHANYOUNGK                                                              
+                                               BODY + 2 FIN SETS DYNAMIC DERIVATIVES
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  2.50        0.00     850.81   4.433E+05     288.15   5.796E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                            -------------------- DYNAMIC DERIVATIVES (PER DEGREE) --------------------
+     ALPHA      CNQ        CMQ        CAQ        CNAD       CMAD       CYR        CLNR       CLLR       CYP        CLNP       CLLP
+      0.00      0.110     -6.793      0.000      0.332     -0.211      0.314     -9.116      0.000      0.000      0.000     -0.570
+      5.00      0.026     -6.525      0.000      0.332     -0.211      0.309     -9.109      0.052      0.064     -0.748     -0.556
+     10.00     -0.054     -6.324      0.000      0.332     -0.211      0.303     -9.138      0.006      0.041     -0.478     -0.528
+     15.00     -0.129     -6.208      0.000      0.332     -0.211      0.297     -9.181      0.002      0.024     -0.280     -0.526
+     20.00     -0.200     -6.090      0.000      0.332     -0.211      0.292     -9.232      0.001      0.016     -0.194     -0.518
+     25.00     -0.262     -5.964      0.000      0.332     -0.211      0.289     -9.287      0.000      0.012     -0.144     -0.510
+     30.00     -0.322     -5.856      0.000      0.332     -0.211      0.288     -9.343      0.000      0.009     -0.110     -0.499
+
+                           PITCH RATE DERIVATIVES NON-DIMENSIONALIZED BY Q*LREF/2*V
+               YAW AND ROLL RATE DERIVATIVES NON-DIMENSIONALIZED BY R*LATREF/2*V AND P*LATREF/2*V
+
+                        TO CONVERT TO RATE*LENGTH/V, DIVIDE ABOVE RESULTS BY 2
+0*** NOSE TIP ANGLE GREATER THAN MACH ANGLE. HYBRID THEORY INVALID. SECOND ORDER SHOCK EXPANSION TO BE USED.
+
+
+1FIN POTENTIAL FLOW METHOD FAILING.  SOURCE OR SINK LINE SWEPT FORWARD.
+0THE FIRST ORDER FIN POTENTIAL FLOW METHOD FOR FIN WAVE DRAG HAS FAILED.  AN ALTERNATE METHOD HAS BEEN SELECTED.
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE  12
+                                                           CHANYOUNGK                                                              
+                                          STATIC AERODYNAMICS FOR BODY-FIN SET 1 AND 2
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  3.00        0.00    1020.98   6.383E+05     288.15   6.955E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                                                                       ------------------ DERIVATIVES (PER DEGREE) -----------------
+           ------ LONGITUDINAL -----       --- LATERAL DIRECTIONAL ---          LONGITUDINAL             LATERAL DIRECTIONAL
+   ALPHA      CN       CM       CA           CY      CLN      CLL             CNA         CMA         CYB        CLNB        CLLB
+
+    0.00     0.000    0.000    0.357        0.000    0.000    0.000        2.049E-01  -4.122E-01  -1.959E-01   6.590E-02  -1.518E-08
+    5.00     1.517   -1.955    0.357        0.000    0.000    0.000        4.018E-01  -3.698E-01  -2.786E-01   1.082E-01   2.326E-02
+   10.00     4.054   -3.699    0.357        0.000    0.000    0.000        5.519E-01  -2.713E-01  -3.546E-01  -1.080E-01   2.263E-02
+   15.00     7.044   -4.682    0.357        0.000    0.000    0.000        5.862E-01  -2.215E-01  -3.710E-01  -5.765E-01   6.150E-02
+   20.00     9.916   -5.916    0.357        0.000    0.000    0.000        6.043E-01  -2.630E-01  -3.471E-01  -7.724E-01   9.483E-02
+   25.00    13.091   -7.313    0.356        0.000    0.000    0.000        6.686E-01  -3.981E-01  -3.116E-01  -9.700E-01   1.318E-01
+   30.00    16.607   -9.949    0.354        0.000    0.000    0.000        7.379E-01  -6.563E-01  -2.910E-01  -1.263E+00   1.640E-01
+
+                                            ALPHA      CL       CD     CL/CD   X-C.P.
+
+                                             0.00    0.000    0.357    0.000   -2.012
+                                             5.00    1.480    0.488    3.034   -1.289
+                                            10.00    3.930    1.055    3.723   -0.913
+                                            15.00    6.712    2.168    3.096   -0.665
+                                            20.00    9.196    3.727    2.468   -0.597
+                                            25.00   11.714    5.855    2.001   -0.559
+                                            30.00   14.205    8.610    1.650   -0.599
+0                                               PANEL DEFLECTION ANGLES (DEGREES)
+                                        FIN SET   FIN 1      FIN 2      FIN 3      FIN 4
+                                           1       0.00       0.00       0.00       0.00
+                                           2       0.00       0.00       0.00       0.00
+ 
+ 
+ 
+0 LINEAR DATA FOR BODY ALONE WAS GENERATED USING THE SECOND-ORDER SHOCK EXPANSION METHOD
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE  13
+                                                           CHANYOUNGK                                                              
+                                               BODY + 2 FIN SETS DYNAMIC DERIVATIVES
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  3.00        0.00    1020.98   6.383E+05     288.15   6.955E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                            -------------------- DYNAMIC DERIVATIVES (PER DEGREE) --------------------
+     ALPHA      CNQ        CMQ        CAQ        CNAD       CMAD       CYR        CLNR       CLLR       CYP        CLNP       CLLP
+      0.00     -0.187     -3.794      0.000      0.144     -0.092      0.070     -6.709      0.000      0.000      0.000     -0.529
+      5.00     -0.259     -3.538      0.000      0.144     -0.092      0.065     -6.717      0.050      0.053     -0.622     -0.521
+     10.00     -0.327     -3.350      0.000      0.144     -0.092      0.060     -6.751      0.006      0.034     -0.407     -0.494
+     15.00     -0.392     -3.242      0.000      0.144     -0.092      0.054     -6.796      0.002      0.021     -0.243     -0.493
+     20.00     -0.454     -3.138      0.000      0.144     -0.092      0.049     -6.843      0.001      0.015     -0.172     -0.488
+     25.00     -0.516     -3.053      0.000      0.144     -0.092      0.045     -6.890      0.000      0.011     -0.131     -0.484
+     30.00     -0.582     -2.924      0.000      0.144     -0.092      0.043     -6.933      0.000      0.009     -0.103     -0.477
+
+                           PITCH RATE DERIVATIVES NON-DIMENSIONALIZED BY Q*LREF/2*V
+               YAW AND ROLL RATE DERIVATIVES NON-DIMENSIONALIZED BY R*LATREF/2*V AND P*LATREF/2*V
+
+                        TO CONVERT TO RATE*LENGTH/V, DIVIDE ABOVE RESULTS BY 2
+0*** NOSE TIP ANGLE GREATER THAN MACH ANGLE. HYBRID THEORY INVALID. SECOND ORDER SHOCK EXPANSION TO BE USED.
+
+
+1FIN POTENTIAL FLOW METHOD FAILING.  SOURCE OR SINK LINE SWEPT FORWARD.
+0THE FIRST ORDER FIN POTENTIAL FLOW METHOD FOR FIN WAVE DRAG HAS FAILED.  AN ALTERNATE METHOD HAS BEEN SELECTED.
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE  14
+                                                           CHANYOUNGK                                                              
+                                          STATIC AERODYNAMICS FOR BODY-FIN SET 1 AND 2
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  3.50        0.00    1191.14   8.689E+05     288.15   8.114E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                                                                       ------------------ DERIVATIVES (PER DEGREE) -----------------
+           ------ LONGITUDINAL -----       --- LATERAL DIRECTIONAL ---          LONGITUDINAL             LATERAL DIRECTIONAL
+   ALPHA      CN       CM       CA           CY      CLN      CLL             CNA         CMA         CYB        CLNB        CLLB
+
+    0.00     0.000    0.000    0.322        0.000    0.000    0.000        1.548E-01  -2.399E-01  -1.643E-01   8.825E-02  -1.541E-08
+    5.00     1.335   -1.340    0.322        0.000    0.000    0.000        3.793E-01  -2.962E-01  -2.535E-01   1.177E-01   1.935E-02
+   10.00     3.838   -2.964    0.324        0.000    0.000    0.000        5.122E-01  -2.575E-01  -3.402E-01  -8.573E-02   1.627E-02
+   15.00     6.458   -3.926    0.328        0.000    0.000    0.000        5.359E-01  -2.009E-01  -3.407E-01  -5.119E-01   5.663E-02
+   20.00     9.198   -4.973    0.332        0.000    0.000    0.000        5.845E-01  -2.894E-01  -3.254E-01  -6.963E-01   8.345E-02
+   25.00    12.308   -6.837    0.336        0.000    0.000    0.000        6.816E-01  -4.613E-01  -2.988E-01  -8.837E-01   1.102E-01
+   30.00    16.032   -9.618    0.340        0.000    0.000    0.000        8.078E-01  -6.509E-01  -2.885E-01  -1.133E+00   1.396E-01
+
+                                            ALPHA      CL       CD     CL/CD   X-C.P.
+
+                                             0.00    0.000    0.322    0.000   -1.550
+                                             5.00    1.302    0.437    2.977   -1.004
+                                            10.00    3.724    0.986    3.777   -0.772
+                                            15.00    6.153    1.988    3.095   -0.608
+                                            20.00    8.530    3.458    2.467   -0.541
+                                            25.00   11.013    5.506    2.000   -0.556
+                                            30.00   13.714    8.311    1.650   -0.600
+0                                               PANEL DEFLECTION ANGLES (DEGREES)
+                                        FIN SET   FIN 1      FIN 2      FIN 3      FIN 4
+                                           1       0.00       0.00       0.00       0.00
+                                           2       0.00       0.00       0.00       0.00
+ 
+ 
+ 
+0 LINEAR DATA FOR BODY ALONE WAS GENERATED USING THE SECOND-ORDER SHOCK EXPANSION METHOD
+1                                        THE USAF AUTOMATED MISSILE DATCOM * REV 5/97 *                                   CASE   1
+                                         AERODYNAMIC METHODS FOR MISSILE CONFIGURATIONS                                    PAGE  15
+                                                           CHANYOUNGK                                                              
+                                               BODY + 2 FIN SETS DYNAMIC DERIVATIVES
+
+
+ -------------------------------- FLIGHT CONDITIONS ------------------------------   ------------- REFERENCE DIMENSIONS ------------
+  MACH    ALTITUDE   VELOCITY   DYNAMIC   TEMPERATURE  REYNOLDS   SIDESLIP   ROLL      REF.      REF. LENGTH     MOMENT REF. CENTER
+ NUMBER                         PRESSURE                NUMBER      ANGLE    ANGLE     AREA     LONG.    LAT.     LONG.    VERTICAL
+              M         M/SEC    NT/ M**2     DEG K      1/ M        DEG      DEG       M**2      M        M         M          M
+  3.50        0.00    1191.14   8.689E+05     288.15   8.114E+07      0.00     0.00     0.013    0.127    0.127     1.500      0.000
+
+
+                            -------------------- DYNAMIC DERIVATIVES (PER DEGREE) --------------------
+     ALPHA      CNQ        CMQ        CAQ        CNAD       CMAD       CYR        CLNR       CLLR       CYP        CLNP       CLLP
+      0.00     -0.342     -2.017      0.000      0.031     -0.020     -0.064     -5.169      0.000      0.000      0.000     -0.500
+      5.00     -0.402     -1.801      0.000      0.031     -0.020     -0.068     -5.181      0.045      0.047     -0.560     -0.492
+     10.00     -0.463     -1.624      0.000      0.031     -0.020     -0.073     -5.214      0.007      0.032     -0.378     -0.469
+     15.00     -0.522     -1.507      0.000      0.031     -0.020     -0.078     -5.255      0.001      0.020     -0.237     -0.467
+     20.00     -0.578     -1.409      0.000      0.031     -0.020     -0.083     -5.297      0.001      0.015     -0.172     -0.466
+     25.00     -0.638     -1.290      0.000      0.031     -0.020     -0.087     -5.338      0.000      0.011     -0.133     -0.465
+     30.00     -0.708     -1.152      0.000      0.031     -0.020     -0.090     -5.375      0.000      0.009     -0.106     -0.463
+
+                           PITCH RATE DERIVATIVES NON-DIMENSIONALIZED BY Q*LREF/2*V
+               YAW AND ROLL RATE DERIVATIVES NON-DIMENSIONALIZED BY R*LATREF/2*V AND P*LATREF/2*V
+
+                        TO CONVERT TO RATE*LENGTH/V, DIVIDE ABOVE RESULTS BY 2
+1*** END OF JOB ***
